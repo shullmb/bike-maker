@@ -1,0 +1,50 @@
+<h3>Update your data</h3>
+
+<form method="POST" action="/bikes/<%= bike.id %>?_method=PUT">
+  <!-- manufacturer select -->
+  <select name="manufacturer">
+    <% manufacturers.forEach( function(manufacturer) { %>
+      <option value="<%= manufacturer.name %>"
+        <% if (manufacturer.name === bike.manufacturer) { %>
+          <%= "selected" %>
+        <% } %>
+      ><%= manufacturer.name %></option>
+    <% }) %>
+  </select>
+  <!-- year select -->
+  <select name="year" >
+    <option value="" disabled hidden >Year</option>
+    <% for (let i = 1956; i <= new Date().getFullYear(); i++ ) { %>
+    <option value="<%= i %>"
+      <% if ( i === bike.year) { %>
+        <%= "selected" %>
+      <% } %>
+    >
+    <%= i %></option>
+    <% } %>
+  </select>
+    <input type="text" name="model" value="<%= bike.model %>">
+  <select name="size" >
+    <option value="" disabled hidden >Size</option>
+    <% for (let i = 42; i <= 72; i+=2) { %>
+      <option value="<%= i %>"
+        <% if ( i === bike.size) { %>
+          <%= "selected" %>
+        <% } %>
+      >
+      <%= i %></option>
+    <% } %>
+  </select>
+  <input class="btn" type="submit" value="update my bike">
+</form>
+
+<!-- 
+add select
+      loop through manufacturers
+        make option elements within select tag value man.name
+
+add year dropdown
+  for loop 1956 - 2019
+add size dropdown
+  for loop 42 - 72 i+=2
+-->
