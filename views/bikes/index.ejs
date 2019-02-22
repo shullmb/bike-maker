@@ -1,6 +1,7 @@
 
 
 <% bikes.forEach( function(bike) { %>
-  <p><%= bike.year + " " + bike.manufacturer + " " + bike.model %></p>
+  <p><a href="/bikes/<%= bike.id %>">
+  <%= bike.year + " " + bike.manufacturer + " " + bike.model %></a></p>
 
 <% }) %>
