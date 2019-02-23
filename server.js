@@ -25,8 +25,8 @@ app.get('/bikes', function(req, res) {
 	})
 })
 
+// GET NEW FORM -- Send third party 'manugacturer' data to front via request() & bikeindex api
 app.get('/bikes/new', function(req, res) {
-	// request hit bikeindex
 		let uri = 'https://bikeindex.org:443/api/v3/manufacturers?page=1&per_page=10'
 		request(uri, function(err, response, body) {
 			let manufacturers = JSON.parse(body).manufacturers
@@ -41,7 +41,7 @@ app.get('/bikes/:id', function(req, res) {
 	})
 })
 
-// GET EDIT FORM
+// GET EDIT FORM -- Send bikeindex data and data from our own db
 app.get('/bikes/:id/edit', function(req, res) {
 	let uri = 'https://bikeindex.org:443/api/v3/manufacturers?page=1&per_page=10'
 	request(uri, function (err, response, body) {

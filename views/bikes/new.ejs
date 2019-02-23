@@ -1,30 +1,5 @@
-<h3>Gimme your data</h3>
-
-<form method="POST" action="/bikes">
-  <!-- manufacturer select -->
-  <select name="manufacturer">
-    <% manufacturers.forEach( function(manufacturer) { %>
-      <option value="<%= manufacturer.name %>"><%= manufacturer.name %></option>
-    <% }) %>
-  </select>
-  <!-- year select -->
-  <select name="year" >
-    <option value="" disabled selected hidden >Year</option>
-    <% for (let i = 1956; i <= new Date().getFullYear(); i++ ) { %>
-    <option value="<%= i %>"><%= i %></option>
-    <% } %>
-    </select>
-    <input type="text" name="model" placeholder="model">
-    <select name="size" >
-    <option value="" disabled selected hidden >Size</option>
-    <% for (let i = 42; i <= 72; i+=2) { %>
-      <option value="<%= i %>"><%= i %></option>
-    <% } %>
-  </select>
-  <input class="btn" type="submit" value="Add my bike">
-</form>
-
 <!-- 
+** Logic to populate drop downs **
 add select
       loop through manufacturers
         make option elements within select tag value man.name
@@ -34,3 +9,37 @@ add year dropdown
 add size dropdown
   for loop 42 - 72 i+=2
 -->
+
+<h3>Gimme your data</h3>
+
+<form method="POST" action="/bikes">
+  <!-- manufacturer select -->
+  <select name="manufacturer">
+    <% manufacturers.forEach( function(manufacturer) { %>
+      <option value="<%= manufacturer.name %>"><%= manufacturer.name %></option>
+    <% }) %>
+  </select>
+
+  <!-- year select -->
+  <select name="year" >
+    <option value="" disabled selected hidden >Year</option>
+    <% for (let i = 1956; i <= new Date().getFullYear(); i++ ) { %>
+    <option value="<%= i %>"><%= i %></option>
+    <% } %>
+  </select>
+
+  <!-- model text input -->
+  <input type="text" name="model" placeholder="model">
+
+  <!-- size select -->
+  <select name="size" >
+    <option value="" disabled selected hidden >Size</option>
+    <% for (let i = 42; i <= 72; i+=2) { %>
+      <option value="<%= i %>"><%= i %></option>
+    <% } %>
+  </select>
+  
+  <!-- submit -->
+  <input class="btn" type="submit" value="Add my bike">
+</form>
+

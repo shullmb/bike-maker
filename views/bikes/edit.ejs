@@ -1,29 +1,57 @@
 <h3>Update your data</h3>
 
+<!-- 
+** populating selects with bike manufacturer from db **
+1. loop through manugacturers from api
+2. create <option> element for each
+3. if: manufacturer.name === bike.manufacturer
+   then: add `selected` attribute to option 
+    
+   e.g. 
+    GET /bikes/2/edit
+    | id | manufacturer | year |   model    | size |
+    +----+--------------+------+------------+------+
+    | 2  | Kona         | 2018 | Roadhouse  | 56   |
+    
+    renders:
+    <form ...>
+    <select name="manufacturer">
+      ...
+      <option value="Not Kona"> Not Kona </option>
+      <option value="Kona" selected> Kona </option>
+      <option value="Other Brand"> Other Brand </option>
+      ...
+    </select>
+-->
+
 <form method="POST" action="/bikes/<%= bike.id %>?_method=PUT">
   <!-- manufacturer select -->
   <select name="manufacturer">
     <% manufacturers.forEach( function(manufacturer) { %>
       <option value="<%= manufacturer.name %>"
-        <% if (manufacturer.name === bike.manufacturer) { %>
+        <% if (manufacturer.name === bike.manufacturer) { %> 
           <%= "selected" %>
         <% } %>
       ><%= manufacturer.name %></option>
     <% }) %>
   </select>
+
   <!-- year select -->
   <select name="year" >
     <option value="" disabled hidden >Year</option>
     <% for (let i = 1956; i <= new Date().getFullYear(); i++ ) { %>
-    <option value="<%= i %>"
-      <% if ( i === bike.year) { %>
-        <%= "selected" %>
-      <% } %>
-    >
-    <%= i %></option>
+      <option value="<%= i %>"
+        <% if ( i === bike.year) { %>
+          <%= "selected" %>
+        <% } %>
+      ><%= i %></option>
     <% } %>
   </select>
-    <input type="text" name="model" value="<%= bike.model %>">
+
+  <!-- model text input -->
+  <input type="text" name="model" value="<%= bike.model %>">
+
+  <!-- size select -->
   <select name="size" >
     <option value="" disabled hidden >Size</option>
     <% for (let i = 42; i <= 72; i+=2) { %>
@@ -31,20 +59,10 @@
         <% if ( i === bike.size) { %>
           <%= "selected" %>
         <% } %>
-      >
-      <%= i %></option>
+      ><%= i %></option>
     <% } %>
   </select>
+
+  <!-- submit -->
   <input class="btn" type="submit" value="update my bike">
 </form>
-
-<!-- 
-add select
-      loop through manufacturers
-        make option elements within select tag value man.name
-
-add year dropdown
-  for loop 1956 - 2019
-add size dropdown
-  for loop 42 - 72 i+=2
--->
